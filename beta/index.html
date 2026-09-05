@@ -3,67 +3,2316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro Word | Agencia de Viajes</title>
-    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css">
+    <title>Retro World - Agencia de Viajes</title>
+
+    <!-- ===== GOOGLE FONTS ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Press+Start+2P&family=Poppins:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- ===== SWIPER CSS ===== -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <!-- ===== AOS CSS ===== -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+    <style>
+        /* ============================================================
+                   RETRO WORLD - AGENCIA DE VIAJES
+                   CSS AVANZADO CON ANIMACIONES PROFESIONALES
+                   ============================================================ */
+
+        /* ===== VARIABLES Y RESET ===== */
+        :root {
+            --color-primary: #ff6b35;
+            --color-secondary: #00d4ff;
+            --color-accent: #ffd700;
+            --color-dark: #0a0a1a;
+            --color-dark-2: #12122a;
+            --color-dark-3: #1a1a3e;
+            --color-cream: #f5f0e8;
+            --color-cream-dark: #e8e0d5;
+            --color-text: #2a2a4a;
+            --color-text-light: #f5f0e8;
+            --color-glass: rgba(255, 255, 255, 0.08);
+            --color-glass-border: rgba(255, 255, 255, 0.18);
+            --color-neon-pink: #ff2d95;
+            --color-neon-purple: #b026ff;
+            --color-neon-green: #39ff14;
+            --color-neon-blue: #00d4ff;
+            --color-sunset-orange: #ff6b35;
+            --color-sunset-pink: #ff2d95;
+            --font-retro: 'Monoton', cursive;
+            --font-pixel: 'Press Start 2P', cursive;
+            --font-futuristic: 'Orbitron', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+            --font-techno: 'Rajdhani', sans-serif;
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --shadow-glow: 0 0 30px rgba(255, 107, 53, 0.5);
+            --shadow-neon: 0 0 20px rgba(0, 212, 255, 0.6);
+            --shadow-depth: 0 25px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-dark);
+            color: var(--color-text-light);
+            overflow-x: hidden;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ===== SCROLLBAR PERSONALIZADA ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: var(--color-dark);
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-dark-2);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--color-primary), var(--color-secondary));
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--color-secondary), var(--color-primary));
+        }
+
+        /* ===== CANVAS DE FONDO ===== */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        /* ===== OVERLAY DE GRADIENTE RETRO ===== */
+        .retro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(255, 107, 53, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(0, 212, 255, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(255, 45, 149, 0.05) 0%, transparent 50%);
+            animation: overlayShift 20s ease-in-out infinite;
+        }
+
+        @keyframes overlayShift {
+            0%,
+            100% {
+                background-position: 0% 0%, 0% 0%, 0% 0%;
+            }
+            25% {
+                background-position: 3% 2%, -3% -2%, 2% -3%;
+            }
+            50% {
+                background-position: -2% 3%, 3% 2%, -3% 2%;
+            }
+            75% {
+                background-position: 2% -3%, -2% 3%, 3% -2%;
+            }
+        }
+
+        /* ===== WRAPPER PRINCIPAL ===== */
+        .main-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ============================================================
+                   NAVEGACIÓN - GLASSMORPHISM AVANZADO
+                   ============================================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.6s var(--transition-smooth);
+            background: transparent;
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 26, 0.85);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border-bottom: 1px solid var(--color-glass-border);
+            padding: 12px 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg,
+                    rgba(255, 107, 53, 0.05) 0%,
+                    rgba(0, 212, 255, 0.05) 25%,
+                    rgba(255, 45, 149, 0.05) 50%,
+                    rgba(0, 212, 255, 0.05) 75%,
+                    rgba(255, 107, 53, 0.05) 100%);
+            pointer-events: none;
+            animation: navbarShimmer 8s linear infinite;
+            background-size: 200% 100%;
+        }
+
+        @keyframes navbarShimmer {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        /* ===== LOGO ===== */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-neon-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            position: relative;
+            animation: logoPulse 3s var(--transition-bounce) infinite;
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.6), 0 0 60px rgba(255, 45, 149, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.5s var(--transition-bounce);
+        }
+
+        .logo-icon:hover {
+            transform: scale(1.15) rotate(360deg);
+            box-shadow: 0 0 50px rgba(255, 107, 53, 0.8), 0 0 100px rgba(255, 45, 149, 0.5);
+            border-color: var(--color-accent);
+        }
+
+        @keyframes logoPulse {
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(255, 107, 53, 0.6), 0 0 60px rgba(255, 45, 149, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 50px rgba(255, 107, 53, 0.9), 0 0 90px rgba(255, 45, 149, 0.6);
+            }
+        }
+
+        .logo-text {
+            font-family: var(--font-retro);
+            font-size: 28px;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent), var(--color-neon-pink), var(--color-secondary));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: logoGradient 5s ease-in-out infinite;
+            text-shadow: none;
+            filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.4));
+        }
+
+        @keyframes logoGradient {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* ===== MENÚ ===== */
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+            position: relative;
+            z-index: 2;
+        }
+
+        .nav-menu li a {
+            text-decoration: none;
+            color: var(--color-text-light);
+            font-family: var(--font-techno);
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.4s var(--transition-smooth);
+            opacity: 0.85;
+        }
+
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-neon-pink));
+            transition: width 0.5s var(--transition-bounce);
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.6);
+        }
+
+        .nav-menu li a:hover::after,
+        .nav-menu li a.active::after {
+            width: 100%;
+        }
+
+        .nav-menu li a:hover {
+            opacity: 1;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+            letter-spacing: 3px;
+        }
+
+        .nav-menu li a.active {
+            opacity: 1;
+            color: var(--color-accent);
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        /* ===== BOTÓN RESERVAR ===== */
+        .btn-reservar {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-neon-pink));
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-family: var(--font-techno);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s var(--transition-bounce);
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.4);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-reservar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s var(--transition-smooth);
+        }
+
+        .btn-reservar:hover::before {
+            left: 100%;
+        }
+
+        .btn-reservar:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.7), 0 0 60px rgba(255, 45, 149, 0.4);
+            letter-spacing: 3px;
+        }
+
+        /* ===== HAMBURGUESA ===== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+            position: relative;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background: var(--color-text-light);
+            border-radius: 3px;
+            transition: all 0.5s var(--transition-bounce);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+            background: var(--color-primary);
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.7);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+            background: var(--color-neon-pink);
+            box-shadow: 0 0 15px rgba(255, 45, 149, 0.7);
+        }
+
+        /* ============================================================
+                   HERO SECTION
+                   ============================================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 120px 50px 60px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%),
+                radial-gradient(circle at 70% 30%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 30% 70%, rgba(255, 45, 149, 0.08) 0%, transparent 50%);
+            z-index: 1;
+            animation: heroGlow 6s ease-in-out infinite;
+        }
+
+        @keyframes heroGlow {
+            0%,
+            100% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 25px;
+            border: 2px solid var(--color-secondary);
+            border-radius: 30px;
+            font-family: var(--font-techno);
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-secondary);
+            margin-bottom: 30px;
+            animation: badgePulse 3s var(--transition-smooth) infinite;
+            background: rgba(0, 212, 255, 0.08);
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes badgePulse {
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+                border-color: var(--color-secondary);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(0, 212, 255, 0.7);
+                border-color: var(--color-accent);
+            }
+        }
+
+        .hero-title {
+            font-family: var(--font-retro);
+            font-size: clamp(50px, 8vw, 100px);
+            letter-spacing: 4px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg,
+                    #ff6b35 0%,
+                    #ffd700 20%,
+                    #ff2d95 40%,
+                    #00d4ff 60%,
+                    #b026ff 80%,
+                    #ff6b35 100%);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: heroTitleGradient 8s ease-in-out infinite;
+            filter: drop-shadow(0 0 40px rgba(255, 107, 53, 0.5));
+            position: relative;
+        }
+
+        @keyframes heroTitleGradient {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-techno);
+            font-size: clamp(16px, 2.5vw, 24px);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--color-cream);
+            opacity: 0.85;
+            margin-bottom: 15px;
+            animation: subtitleGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes subtitleGlow {
+            0%,
+            100% {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(255, 107, 53, 0.6), 0 0 60px rgba(0, 212, 255, 0.4);
+            }
+        }
+
+        .hero-description {
+            font-size: clamp(14px, 1.5vw, 18px);
+            color: var(--color-cream-dark);
+            opacity: 0.7;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 16px 35px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-neon-pink));
+            border: none;
+            border-radius: 40px;
+            color: white;
+            font-family: var(--font-techno);
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s var(--transition-bounce);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            transition: left 0.8s var(--transition-smooth);
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.8), 0 0 80px rgba(255, 45, 149, 0.5);
+            letter-spacing: 4px;
+        }
+
+        .btn-secondary {
+            padding: 16px 35px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--color-secondary);
+            border-radius: 40px;
+            color: var(--color-secondary);
+            font-family: var(--font-techno);
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s var(--transition-bounce);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+            text-decoration: none;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 212, 255, 0.15);
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.5), 0 0 100px rgba(0, 212, 255, 0.3);
+            transform: translateY(-5px);
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+            letter-spacing: 4px;
+        }
+
+        /* ===== SCROLL INDICATOR ===== */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--color-cream);
+            opacity: 0.6;
+            font-family: var(--font-techno);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: scrollBounce 2s infinite;
+        }
+
+        @keyframes scrollBounce {
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(15px);
+            }
+        }
+
+        .scroll-indicator .arrow-down {
+            width: 25px;
+            height: 25px;
+            border-right: 2px solid var(--color-primary);
+            border-bottom: 2px solid var(--color-primary);
+            transform: rotate(45deg);
+            animation: arrowPulse 2s infinite;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.4);
+            border-radius: 2px;
+        }
+
+        @keyframes arrowPulse {
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(255, 107, 53, 0.7);
+            }
+        }
+
+        /* ============================================================
+                   SECCIONES GENERALES
+                   ============================================================ */
+        .section {
+            padding: 100px 50px;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-tag {
+            font-family: var(--font-techno);
+            font-size: 13px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--color-secondary);
+            display: block;
+            margin-bottom: 10px;
+            animation: tagPulse 3s infinite;
+        }
+
+        @keyframes tagPulse {
+            0%,
+            100% {
+                text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
+            }
+        }
+
+        .section-title {
+            font-family: var(--font-futuristic);
+            font-size: clamp(30px, 5vw, 50px);
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--color-cream), var(--color-accent), var(--color-cream));
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: sectionTitleGradient 5s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes sectionTitleGradient {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .section-divider {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-neon-pink));
+            border-radius: 4px;
+            margin: 0 auto;
+            position: relative;
+            animation: dividerGlow 3s infinite;
+        }
+
+        @keyframes dividerGlow {
+            0%,
+            100% {
+                box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(0, 212, 255, 0.7);
+            }
+        }
+
+        /* ============================================================
+                   CARRUSELES SWIPER - ESTILO AVANZADO
+                   ============================================================ */
+        .swiper {
+            padding: 30px 10px 60px;
+            border-radius: 20px;
+        }
+
+        .swiper-slide {
+            transition: all 0.7s var(--transition-smooth);
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--color-dark-2);
+            border: 1px solid var(--color-glass-border);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .swiper-slide:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6), 0 0 50px rgba(255, 107, 53, 0.25);
+            border-color: rgba(255, 107, 53, 0.5);
+        }
+
+        .swiper-slide img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: all 0.8s var(--transition-smooth);
+            filter: brightness(0.75) saturate(1.1);
+        }
+
+        .swiper-slide:hover img {
+            transform: scale(1.08);
+            filter: brightness(0.9) saturate(1.3);
+        }
+
+        .slide-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 20px 20px;
+            background: linear-gradient(to top,
+                    rgba(10, 10, 26, 0.95) 0%,
+                    rgba(10, 10, 26, 0.6) 50%,
+                    transparent 100%);
+            z-index: 2;
+        }
+
+        .slide-info h3 {
+            font-family: var(--font-futuristic);
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--color-text-light);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .slide-info p {
+            font-family: var(--font-techno);
+            font-size: 13px;
+            letter-spacing: 1px;
+            color: var(--color-cream-dark);
+            opacity: 0.8;
+        }
+
+        .slide-price {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 18px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-neon-pink));
+            border-radius: 20px;
+            font-family: var(--font-futuristic);
+            font-weight: 700;
+            font-size: 14px;
+            color: white;
+            letter-spacing: 1px;
+            z-index: 3;
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.5);
+            animation: priceFloat 3s infinite;
+        }
+
+        @keyframes priceFloat {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* ===== PAGINACIÓN Y NAVEGACIÓN SWIPER ===== */
+        .swiper-pagination-bullet {
+            background: var(--color-cream);
+            opacity: 0.4;
+            width: 10px;
+            height: 10px;
+            transition: all 0.4s var(--transition-smooth);
+        }
+
+        .swiper-pagination-bullet-active {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-neon-pink));
+            opacity: 1;
+            width: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.7);
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--color-cream);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            transition: all 0.5s var(--transition-bounce);
+            backdrop-filter: blur(10px);
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background: rgba(255, 107, 53, 0.25);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+            transform: scale(1.1);
+        }
+
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* ===== TESTIMONIOS ===== */
+        .testimonial-card {
+            background: var(--color-dark-3);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s var(--transition-smooth);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: var(--font-retro);
+            font-size: 80px;
+            color: var(--color-primary);
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        .testimonial-card:hover {
+            border-color: rgba(255, 107, 53, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 107, 53, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 3px solid var(--color-primary);
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+            overflow: hidden;
+            animation: avatarGlow 4s infinite;
+        }
+
+        @keyframes avatarGlow {
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255, 107, 53, 0.8);
+            }
+        }
+
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-card h4 {
+            font-family: var(--font-futuristic);
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            color: var(--color-accent);
+        }
+
+        .testimonial-card .location {
+            font-family: var(--font-techno);
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--color-secondary);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card p {
+            font-size: 14px;
+            color: var(--color-cream-dark);
+            opacity: 0.85;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .testimonial-stars {
+            margin-bottom: 15px;
+            font-size: 18px;
+            letter-spacing: 3px;
+            animation: starGlow 2s infinite;
+        }
+
+        @keyframes starGlow {
+            0%,
+            100% {
+                text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
+            }
+        }
+
+        /* ===== SECCIÓN GALERÍA - GRID CON EFECTOS ===== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 1;
+            border: 1px solid var(--color-glass-border);
+            transition: all 0.7s var(--transition-smooth);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.8s var(--transition-smooth);
+            filter: brightness(0.7) saturate(1.1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg,
+                    rgba(255, 107, 53, 0.3) 0%,
+                    rgba(0, 212, 255, 0.2) 50%,
+                    rgba(255, 45, 149, 0.3) 100%);
+            opacity: 0;
+            transition: opacity 0.6s var(--transition-smooth);
+            pointer-events: none;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(0.9) saturate(1.3);
+        }
+
+        .gallery-item:hover {
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 50px rgba(255, 107, 53, 0.3);
+            border-color: rgba(255, 107, 53, 0.5);
+            transform: translateY(-8px);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            z-index: 2;
+            background: linear-gradient(to top, rgba(10, 10, 26, 0.9), transparent);
+        }
+
+        .gallery-overlay h4 {
+            font-family: var(--font-techno);
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+        }
+
+        .gallery-overlay span {
+            font-family: var(--font-techno);
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--color-secondary);
+            text-transform: uppercase;
+        }
+
+        /* ===== SECCIÓN PAQUETES ===== */
+        .paquete-card {
+            background: var(--color-dark-3);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s var(--transition-bounce);
+            cursor: pointer;
+        }
+
+        .paquete-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg,
+                    transparent,
+                    rgba(255, 107, 53, 0.1),
+                    transparent,
+                    rgba(0, 212, 255, 0.1),
+                    transparent);
+            animation: rotateGlow 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotateGlow {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .paquete-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 60px rgba(255, 107, 53, 0.3);
+            border-color: rgba(255, 107, 53, 0.6);
+        }
+
+        .paquete-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            animation: iconFloat 3s infinite;
+            display: block;
+        }
+
+        @keyframes iconFloat {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .paquete-card h3 {
+            font-family: var(--font-futuristic);
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-bottom: 15px;
+        }
+
+        .paquete-price {
+            font-family: var(--font-retro);
+            font-size: 32px;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .paquete-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .paquete-features li {
+            font-family: var(--font-techno);
+            font-size: 13px;
+            letter-spacing: 1px;
+            color: var(--color-cream-dark);
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .paquete-features li::before {
+            content: '✦';
+            color: var(--color-primary);
+            font-size: 10px;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+                text-shadow: 0 0 15px rgba(255, 107, 53, 0.8);
+            }
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: rgba(10, 10, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--color-glass-border);
+            padding: 60px 50px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg,
+                    rgba(255, 107, 53, 0.05) 0%,
+                    rgba(0, 212, 255, 0.05) 50%,
+                    rgba(255, 45, 149, 0.05) 100%);
+            pointer-events: none;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-brand h3 {
+            font-family: var(--font-retro);
+            font-size: 24px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-brand p {
+            font-size: 13px;
+            color: var(--color-cream-dark);
+            opacity: 0.7;
+            line-height: 1.8;
+        }
+
+        .footer-links h4,
+        .footer-contact h4 {
+            font-family: var(--font-futuristic);
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            margin-bottom: 15px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links ul li a {
+            color: var(--color-cream-dark);
+            text-decoration: none;
+            font-family: var(--font-techno);
+            font-size: 13px;
+            letter-spacing: 1px;
+            transition: all 0.3s var(--transition-smooth);
+            opacity: 0.7;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--color-primary);
+            opacity: 1;
+            padding-left: 5px;
+            text-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+        }
+
+        .footer-contact p {
+            font-size: 13px;
+            color: var(--color-cream-dark);
+            opacity: 0.7;
+            margin-bottom: 8px;
+            font-family: var(--font-techno);
+            letter-spacing: 1px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--color-glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-cream);
+            text-decoration: none;
+            transition: all 0.4s var(--transition-bounce);
+            font-size: 16px;
+        }
+
+        .footer-social a:hover {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-neon-pink));
+            border-color: transparent;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-bottom p {
+            font-size: 12px;
+            color: var(--color-cream-dark);
+            opacity: 0.5;
+            font-family: var(--font-techno);
+            letter-spacing: 2px;
+        }
+
+        /* ============================================================
+                   RESPONSIVE
+                   ============================================================ */
+        @media (max-width: 1024px) {
+            .navbar {
+                padding: 15px 30px;
+            }
+            .navbar.scrolled {
+                padding: 10px 30px;
+            }
+            .section {
+                padding: 70px 30px;
+            }
+            .hero {
+                padding: 100px 30px 60px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(10, 10, 26, 0.95);
+                backdrop-filter: blur(30px);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 100px 40px 40px;
+                gap: 25px;
+                transition: right 0.6s var(--transition-smooth);
+                box-shadow: -10px 0 50px rgba(0, 0, 0, 0.5);
+                border-left: 1px solid var(--color-glass-border);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-menu li a {
+                font-size: 14px;
+                letter-spacing: 3px;
+            }
+
+            .btn-reservar {
+                padding: 10px 20px;
+                font-size: 12px;
+            }
+
+            .hero-title {
+                font-size: clamp(35px, 8vw, 60px);
+            }
+
+            .swiper-slide img {
+                height: 250px;
+            }
+
+            .section {
+                padding: 50px 20px;
+            }
+
+            .footer {
+                padding: 40px 20px 15px;
+            }
+
+            .navbar {
+                padding: 12px 20px;
+            }
+            .navbar.scrolled {
+                padding: 10px 20px;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 80px 15px 40px;
+            }
+            .hero-title {
+                font-size: clamp(28px, 10vw, 45px);
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+                padding: 14px 25px;
+                font-size: 13px;
+            }
+            .swiper-slide img {
+                height: 200px;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- ===== CANVAS DE FONDO ANIMADO ===== -->
     <canvas id="bg-canvas"></canvas>
 
-    <nav class="glass-nav">
-        <div class="logo">
-            <h2>Retro<span>Word</span></h2>
-        </div>
-        <ul class="menu-links">
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#destinos">Destinos</a></li>
-            <li><a href="#experiencias">Experiencias</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-        </ul>
-    </nav>
+    <!-- ===== OVERLAY RETRO ===== -->
+    <div class="retro-overlay"></div>
 
-    <header id="inicio" class="hero">
-        <div class="hero-content glass-card">
-            <h1 class="anim-title">Descubre el Mundo a tu Manera</h1>
-            <p class="anim-text">Viajes inolvidables diseñados exclusivamente para ti.</p>
-            <button class="btn-primary anim-btn">Explorar Ahora</button>
-        </div>
-    </header>
+    <!-- ===== WRAPPER PRINCIPAL ===== -->
+    <div class="main-wrapper">
 
-    <main id="destinos" class="carousel-section">
-        <h2 class="section-title">Paisajes Majestuosos</h2>
-        
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=800&q=80" alt="Paisaje 1">
-                    <div class="slide-info glass-card">Montañas del Norte</div>
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80" alt="Paisaje 2">
-                    <div class="slide-info glass-card">Valles Profundos</div>
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=80" alt="Paisaje 3">
-                    <div class="slide-info glass-card">Costas Paraíso</div>
-                </div>
-                </div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-        </div>
-    </main>
+        <!-- ============================================================
+        NAVEGACIÓN
+        ============================================================ -->
+        <nav class="navbar" id="navbar">
+            <a href="#inicio" class="logo-container" onclick="event.preventDefault(); document.querySelector('#inicio').scrollIntoView({behavior:'smooth'});">
+                <div class="logo-icon">🌍</div>
+                <span class="logo-text">RETRO&nbsp;WORLD</span>
+            </a>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
-    <script src="script.js"></script>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#inicio" class="active" onclick="navigateTo(event, 'inicio')">Inicio</a></li>
+                <li><a href="#destinos" onclick="navigateTo(event, 'destinos')">Destinos</a></li>
+                <li><a href="#paquetes" onclick="navigateTo(event, 'paquetes')">Paquetes</a></li>
+                <li><a href="#galeria" onclick="navigateTo(event, 'galeria')">Galería</a></li>
+                <li><a href="#testimonios" onclick="navigateTo(event, 'testimonios')">Testimonios</a></li>
+                <li><a href="#contacto" onclick="navigateTo(event, 'contacto')">Contacto</a></li>
+                <li><button class="btn-reservar" onclick="event.preventDefault(); alert('🎉 ¡Gracias por tu interés! Pronto nos pondremos en contacto contigo.');">Reservar</button></li>
+            </ul>
+
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+
+        <!-- ============================================================
+        HERO SECTION
+        ============================================================ -->
+        <section class="hero" id="inicio">
+            <div class="hero-content">
+                <span class="hero-badge">✨ Viaja al Futuro Retro ✨</span>
+                <h1 class="hero-title">RETRO WORLD</h1>
+                <p class="hero-subtitle">Agencia de Viajes Interdimensional</p>
+                <p class="hero-description">
+                    Descubre destinos increíbles con estilo retro-futurista.
+                    Paisajes de ensueño, experiencias únicas y aventuras que
+                    desafían el tiempo y el espacio.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#destinos" class="btn-primary" onclick="event.preventDefault(); document.querySelector('#destinos').scrollIntoView({behavior:'smooth'});">
+                        Explorar Destinos
+                    </a>
+                    <a href="#paquetes" class="btn-secondary" onclick="event.preventDefault(); document.querySelector('#paquetes').scrollIntoView({behavior:'smooth'});">
+                        Ver Paquetes
+                    </a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <div class="arrow-down"></div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        SECCIÓN DESTINOS - CARRUSEL 1
+        ============================================================ -->
+        <section class="section" id="destinos">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Explora el Mundo</span>
+                <h2 class="section-title">Destinos Populares</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="swiper swiper-destinos" data-aos="fade-up" data-aos-delay="200">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/800/500?random=1" alt="Paisaje de montaña" loading="lazy">
+                        <span class="slide-price">$1,299</span>
+                        <div class="slide-info">
+                            <h3>🏔️ Andes Peruanos</h3>
+                            <p>Machu Picchu y el Valle Sagrado</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/800/500?random=2" alt="Playa tropical" loading="lazy">
+                        <span class="slide-price">$1,499</span>
+                        <div class="slide-info">
+                            <h3>🏖️ Maldivas</h3>
+                            <p>Paraíso de aguas cristalinas</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/800/500?random=3" alt="Ciudad histórica" loading="lazy">
+                        <span class="slide-price">$899</span>
+                        <div class="slide-info">
+                            <h3>🏛️ Roma, Italia</h3>
+                            <p>Historia y arte milenario</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/800/500?random=4" alt="Aurora boreal" loading="lazy">
+                        <span class="slide-price">$2,199</span>
+                        <div class="slide-info">
+                            <h3>🌌 Noruega</h3>
+                            <p>Auroras boreales mágicas</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/800/500?random=5" alt="Desierto" loading="lazy">
+                        <span class="slide-price">$1,099</span>
+                        <div class="slide-info">
+                            <h3>🏜️ Sahara</h3>
+                            <p>Aventura en dunas doradas</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/800/500?random=6" alt="Ciudad moderna" loading="lazy">
+                        <span class="slide-price">$1,799</span>
+                        <div class="slide-info">
+                            <h3>🏙️ Tokio, Japón</h3>
+                            <p>Futuro y tradición en armonía</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        SECCIÓN PAQUETES - CARRUSEL 2
+        ============================================================ -->
+        <section class="section" id="paquetes" style="background: rgba(255,255,255,0.02);">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Ofertas Especiales</span>
+                <h2 class="section-title">Paquetes Retro</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="swiper swiper-paquetes" data-aos="fade-up" data-aos-delay="200">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="paquete-card">
+                            <span class="paquete-icon">🗺️</span>
+                            <h3>Aventura Total</h3>
+                            <div class="paquete-price">$2,499</div>
+                            <ul class="paquete-features">
+                                <li>7 días / 6 noches</li>
+                                <li>Vuelos incluidos</li>
+                                <li>Hotel 5 estrellas</li>
+                                <li>Guía turístico premium</li>
+                                <li>Actividades extremas</li>
+                            </ul>
+                            <button class="btn-primary" onclick="alert('🎯 Paquete Aventura Total seleccionado')">Elegir</button>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="paquete-card">
+                            <span class="paquete-icon">💑</span>
+                            <h3>Romance Retro</h3>
+                            <div class="paquete-price">$3,199</div>
+                            <ul class="paquete-features">
+                                <li>5 días / 4 noches</li>
+                                <li>Cena romántica incluida</li>
+                                <li>Spa de lujo</li>
+                                <li>Suite con vista</li>
+                                <li>Tour privado</li>
+                            </ul>
+                            <button class="btn-primary" onclick="alert('💝 Paquete Romance Retro seleccionado')">Elegir</button>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="paquete-card">
+                            <span class="paquete-icon">👨‍👩‍👧‍👦</span>
+                            <h3>Familiar Plus</h3>
+                            <div class="paquete-price">$1,899</div>
+                            <ul class="paquete-features">
+                                <li>6 días / 5 noches</li>
+                                <li>Actividades para niños</li>
+                                <li>Parques temáticos</li>
+                                <li>Habitación familiar</li>
+                                <li>Desayuno incluido</li>
+                            </ul>
+                            <button class="btn-primary" onclick="alert('👨‍👩‍👧‍👦 Paquete Familiar Plus seleccionado')">Elegir</button>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="paquete-card">
+                            <span class="paquete-icon">🌊</span>
+                            <h3>Islas Paradisíacas</h3>
+                            <div class="paquete-price">$3,899</div>
+                            <ul class="paquete-features">
+                                <li>10 días / 9 noches</li>
+                                <li>Isla privada</li>
+                                <li>Snorkel y buceo</li>
+                                <li>Yate privado</li>
+                                <li>All inclusive</li>
+                            </ul>
+                            <button class="btn-primary" onclick="alert('🌊 Paquete Islas Paradisíacas seleccionado')">Elegir</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        SECCIÓN GALERÍA - GRID CON EFECTOS
+        ============================================================ -->
+        <section class="section" id="galeria">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Momentos Capturados</span>
+                <h2 class="section-title">Galería de Paisajes</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="gallery-grid" data-aos="fade-up" data-aos-delay="200">
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/600/600?random=10" alt="Paisaje montañoso" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h4>Montañas</h4>
+                        <span>Alpes Suizos</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/600/600?random=11" alt="Playa turquesa" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h4>Playas</h4>
+                        <span>Caribe</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/600/600?random=12" alt="Bosque" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h4>Bosques</h4>
+                        <span>Amazonía</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/600/600?random=13" alt="Ciudad nocturna" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h4>Ciudades</h4>
+                        <span>Nueva York</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/600/600?random=14" alt="Desierto" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h4>Desiertos</h4>
+                        <span>Sahara</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/600/600?random=15" alt="Aurora" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h4>Auroras</h4>
+                        <span>Islandia</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        SECCIÓN TESTIMONIOS - CARRUSEL 3
+        ============================================================ -->
+        <section class="section" id="testimonios" style="background: rgba(255,255,255,0.02);">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Historias Reales</span>
+                <h2 class="section-title">Testimonios</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="swiper swiper-testimonios" data-aos="fade-up" data-aos-delay="200">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-avatar">
+                                <img src="https://i.pravatar.cc/150?img=1" alt="Cliente feliz" loading="lazy">
+                            </div>
+                            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                            <h4>María González</h4>
+                            <span class="location">🌴 Cancún, México</span>
+                            <p>"¡Increíble experiencia con Retro World! El paquete superó todas mis expectativas. Las playas eran paradisíacas y el servicio excepcional. Definitivamente volveré a viajar con ellos."</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-avatar">
+                                <img src="https://i.pravatar.cc/150?img=2" alt="Cliente feliz" loading="lazy">
+                            </div>
+                            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                            <h4>Carlos Mendoza</h4>
+                            <span class="location">🏔️ Cusco, Perú</span>
+                            <p>"La organización fue perfecta. Cada detalle estaba cuidado, desde el vuelo hasta las excursiones. El guía era un experto en la cultura local. ¡Una experiencia inolvidable!"</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-avatar">
+                                <img src="https://i.pravatar.cc/150?img=3" alt="Cliente feliz" loading="lazy">
+                            </div>
+                            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                            <h4>Sofía Ramírez</h4>
+                            <span class="location">🗼 París, Francia</span>
+                            <p>"Viajé sola y me sentí completamente segura y acompañada. Retro World se encargó de todo: traslados, hoteles con encanto y tours privados. ¡Mil gracias por esta aventura!"</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <div class="testimonial-avatar">
+                                <img src="https://i.pravatar.cc/150?img=4" alt="Cliente feliz" loading="lazy">
+                            </div>
+                            <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                            <h4>Diego Torres</h4>
+                            <span class="location">🏝️ Bali, Indonesia</span>
+                            <p>"La mejor agencia de viajes con la que he viajado. Atención personalizada, destinos únicos y una pasión por el detalle que se nota en todo. ¡100% recomendados!"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+        FOOTER
+        ============================================================ -->
+        <footer class="footer" id="contacto">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>RETRO WORLD</h3>
+                    <p>
+                        Agencia de viajes retro-futurista especializada en
+                        experiencias únicas e inolvidables. Viaja con estilo,
+                        viaja con Retro World.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" onclick="event.preventDefault(); alert('📸 Síguenos en Instagram')" title="Instagram">📸</a>
+                        <a href="#" onclick="event.preventDefault(); alert('🐦 Síguenos en Twitter/X')" title="Twitter">🐦</a>
+                        <a href="#" onclick="event.preventDefault(); alert('📘 Síguenos en Facebook')" title="Facebook">📘</a>
+                        <a href="#" onclick="event.preventDefault(); alert('🎵 Síguenos en TikTok')" title="TikTok">🎵</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#destinos" onclick="event.preventDefault(); document.querySelector('#destinos').scrollIntoView({behavior:'smooth'});">Destinos</a></li>
+                        <li><a href="#paquetes" onclick="event.preventDefault(); document.querySelector('#paquetes').scrollIntoView({behavior:'smooth'});">Paquetes</a></li>
+                        <li><a href="#galeria" onclick="event.preventDefault(); document.querySelector('#galeria').scrollIntoView({behavior:'smooth'});">Galería</a></li>
+                        <li><a href="#testimonios" onclick="event.preventDefault(); document.querySelector('#testimonios').scrollIntoView({behavior:'smooth'});">Testimonios</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#" onclick="event.preventDefault(); alert('📄 Política de Privacidad')">Política de Privacidad</a></li>
+                        <li><a href="#" onclick="event.preventDefault(); alert('📄 Términos y Condiciones')">Términos y Condiciones</a></li>
+                        <li><a href="#" onclick="event.preventDefault(); alert('❓ Preguntas Frecuentes')">Preguntas Frecuentes</a></li>
+                        <li><a href="#" onclick="event.preventDefault(); alert('🔒 Seguridad de Viaje')">Seguridad de Viaje</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contacto</h4>
+                    <p>📍 Av. Principal #123, Ciudad</p>
+                    <p>📞 +1 (555) 123-4567</p>
+                    <p>✉️ info@retroworld.com</p>
+                    <p>🕐 Lun - Vie: 9:00 - 18:00</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Retro World - Agencia de Viajes. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+
+    </div><!-- /.main-wrapper -->
+
+    <!-- ============================================================
+    LIBRERÍAS JS - CDN
+    ============================================================ -->
+    <!-- SWIPER JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js">
+    </script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js">
+    </script>
+    <!-- GSAP JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
+    </script>
+
+    <script>
+        /* ============================================================
+           RETRO WORLD - JAVASCRIPT AVANZADO
+           ============================================================ */
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // ===== INICIALIZAR AOS =====
+            AOS.init({
+                duration: 1000,
+                easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+                once: false,
+                mirror: true,
+                offset: 100
+            });
+
+            // ===== INICIALIZAR SWIPER - DESTINOS =====
+            const swiperDestinos = new Swiper('.swiper-destinos', {
+                slidesPerView: 1,
+                spaceBetween: 25,
+                loop: true,
+                speed: 800,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true
+                },
+                pagination: {
+                    el: '.swiper-destinos .swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-destinos .swiper-button-next',
+                    prevEl: '.swiper-destinos .swiper-button-prev',
+                },
+                breakpoints: {
+                    640: { slidesPerView: 2, spaceBetween: 20 },
+                    1024: { slidesPerView: 3, spaceBetween: 25 },
+                    1400: { slidesPerView: 4, spaceBetween: 30 },
+                },
+                effect: 'slide',
+                grabCursor: true,
+                keyboard: { enabled: true },
+            });
+
+            // ===== INICIALIZAR SWIPER - PAQUETES =====
+            const swiperPaquetes = new Swiper('.swiper-paquetes', {
+                slidesPerView: 1,
+                spaceBetween: 25,
+                loop: true,
+                speed: 700,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true
+                },
+                pagination: {
+                    el: '.swiper-paquetes .swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-paquetes .swiper-button-next',
+                    prevEl: '.swiper-paquetes .swiper-button-prev',
+                },
+                breakpoints: {
+                    640: { slidesPerView: 2, spaceBetween: 20 },
+                    1024: { slidesPerView: 3, spaceBetween: 25 },
+                },
+                effect: 'slide',
+                grabCursor: true,
+                keyboard: { enabled: true },
+            });
+
+            // ===== INICIALIZAR SWIPER - TESTIMONIOS =====
+            const swiperTestimonios = new Swiper('.swiper-testimonios', {
+                slidesPerView: 1,
+                spaceBetween: 25,
+                loop: true,
+                speed: 800,
+                autoplay: {
+                    delay: 6000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true
+                },
+                pagination: {
+                    el: '.swiper-testimonios .swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-testimonios .swiper-button-next',
+                    prevEl: '.swiper-testimonios .swiper-button-prev',
+                },
+                breakpoints: {
+                    640: { slidesPerView: 1, spaceBetween: 20 },
+                    1024: { slidesPerView: 2, spaceBetween: 30 },
+                },
+                effect: 'slide',
+                grabCursor: true,
+                keyboard: { enabled: true },
+            });
+
+            // ===== NAVBAR SCROLL EFFECT =====
+            const navbar = document.getElementById('navbar');
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                // Actualizar enlace activo
+                updateActiveLink();
+            });
+
+            // ===== FUNCIÓN NAVEGACIÓN =====
+            window.navigateTo = function(event, sectionId) {
+                event.preventDefault();
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                // Cerrar menú móvil si está abierto
+                if (navMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+                // Actualizar enlace activo
+                document.querySelectorAll('.nav-menu a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                event.target.classList.add('active');
+            };
+
+            // ===== TOGGLE MENÚ MÓVIL =====
+            window.toggleMenu = function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                // Animación con GSAP
+                if (navMenu.classList.contains('active')) {
+                    gsap.fromTo('.nav-menu li',
+                        { x: 50, opacity: 0 },
+                        { x: 0, opacity: 1, duration: 0.6, stagger: 0.08, delay: 0.2, ease: 'back.out(1.7)' }
+                    );
+                }
+            };
+
+            // ===== ACTUALIZAR ENLACE ACTIVO SEGÚN SCROLL =====
+            function updateActiveLink() {
+                const sections = ['inicio', 'destinos', 'paquetes', 'galeria', 'testimonios'];
+                const scrollPos = window.scrollY + 200;
+
+                let currentSection = 'inicio';
+                sections.forEach(secId => {
+                    const sec = document.getElementById(secId);
+                    if (sec && sec.offsetTop <= scrollPos) {
+                        currentSection = secId;
+                    }
+                });
+
+                document.querySelectorAll('.nav-menu a').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + currentSection) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // ===== CANVAS - PARTÍCULAS RETRO ANIMADAS =====
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            // Partículas retro - estilo estrellas/neón
+            const particles = [];
+            const particleCount = Math.min(120, Math.floor(window.innerWidth / 12));
+
+            const colors = [
+                'rgba(255, 107, 53, 0.7)', // naranja
+                'rgba(0, 212, 255, 0.7)', // cian
+                'rgba(255, 45, 149, 0.7)', // rosa
+                'rgba(255, 215, 0, 0.7)', // dorado
+                'rgba(176, 38, 255, 0.7)', // púrpura
+                'rgba(255, 255, 255, 0.5)', // blanco
+            ];
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 3 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.3;
+                    this.speedY = (Math.random() - 0.5) * 0.3;
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                    this.alpha = Math.random() * 0.6 + 0.2;
+                    this.pulseSpeed = Math.random() * 0.02 + 0.005;
+                    this.pulseOffset = Math.random() * Math.PI * 2;
+                    this.trail = [];
+                    this.maxTrail = 5;
+                }
+
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    this.pulseOffset += this.pulseSpeed;
+
+                    // Almacenar trail
+                    this.trail.push({ x: this.x, y: this.y, alpha: this.alpha });
+                    if (this.trail.length > this.maxTrail) {
+                        this.trail.shift();
+                    }
+
+                    // Rebote en bordes
+                    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+                    // Asegurar que se mantenga dentro
+                    this.x = Math.max(0, Math.min(canvas.width, this.x));
+                    this.y = Math.max(0, Math.min(canvas.height, this.y));
+                }
+
+                draw() {
+                    // Dibujar trail
+                    this.trail.forEach((point, index) => {
+                        const trailAlpha = point.alpha * (index / this.trail.length) * 0.5;
+                        const trailSize = this.size * (index / this.trail.length);
+                        ctx.beginPath();
+                        ctx.arc(point.x, point.y, trailSize, 0, Math.PI * 2);
+                        ctx.fillStyle = this.color.replace(/[\d.]+\)$/, trailAlpha + ')');
+                        ctx.fill();
+                    });
+
+                    // Partícula principal con pulso
+                    const pulseFactor = Math.sin(this.pulseOffset) * 0.3 + 0.7;
+                    const currentAlpha = this.alpha * pulseFactor;
+                    const currentSize = this.size * pulseFactor;
+
+                    // Glow effect
+                    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y,
+                    currentSize * 6);
+                    gradient.addColorStop(0, this.color.replace(/[\d.]+\)$/, currentAlpha + ')'));
+                    gradient.addColorStop(0.5, this.color.replace(/[\d.]+\)$/, currentAlpha * 0.4 + ')'));
+                    gradient.addColorStop(1, this.color.replace(/[\d.]+\)$/, '0)'));
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, currentSize * 6, 0, Math.PI * 2);
+                    ctx.fillStyle = gradient;
+                    ctx.fill();
+
+                    // Núcleo brillante
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, currentSize, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color.replace(/[\d.]+\)$/, currentAlpha + ')');
+                    ctx.fill();
+                }
+            }
+
+            // Crear partículas
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            // Función de animación del canvas
+            function animateCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+
+                requestAnimationFrame(animateCanvas);
+            }
+
+            animateCanvas();
+
+            // ===== GSAP ANIMACIONES AVANZADAS EN HERO =====
+            gsap.fromTo('.hero-badge',
+                { opacity: 0, y: -50, scale: 0.8 },
+                { opacity: 1, y: 0, scale: 1, duration: 1.2, delay: 0.3, ease: 'back.out(1.7)' }
+            );
+
+            gsap.fromTo('.hero-title',
+                { opacity: 0, y: 60, scale: 0.7 },
+                { opacity: 1, y: 0, scale: 1, duration: 1.5, delay: 0.5, ease: 'elastic.out(1, 0.5)' }
+            );
+
+            gsap.fromTo('.hero-subtitle',
+                { opacity: 0, letterSpacing: '10px' },
+                { opacity: 1, letterSpacing: '4px', duration: 1.2, delay: 0.9, ease: 'power3.out' }
+            );
+
+            gsap.fromTo('.hero-description',
+                { opacity: 0, y: 30 },
+                { opacity: 1, y: 0, duration: 1, delay: 1.2, ease: 'power2.out' }
+            );
+
+            gsap.fromTo('.hero-buttons',
+                { opacity: 0, y: 40 },
+                { opacity: 1, y: 0, duration: 1, delay: 1.4, ease: 'back.out(1.7)' }
+            );
+
+            // ===== ANIMACIÓN FLOTANTE CONTINUA EN HERO TITLE =====
+            gsap.to('.hero-title', {
+                y: -8,
+                duration: 3,
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut',
+                delay: 2.5
+            });
+
+            // ===== ANIMACIÓN DE ROTACIÓN EN LOGO ICON =====
+            gsap.to('.logo-icon', {
+                rotate: 360,
+                duration: 15,
+                repeat: -1,
+                ease: 'linear'
+            });
+
+            // ===== ANIMACIÓN PARALLAX EN HERO =====
+            window.addEventListener('mousemove', function(e) {
+                const x = (e.clientX / window.innerWidth - 0.5) * 2;
+                const y = (e.clientY / window.innerHeight - 0.5) * 2;
+                gsap.to('.hero-content', {
+                    x: x * -15,
+                    y: y * -10,
+                    duration: 1,
+                    ease: 'power2.out'
+                });
+            });
+
+            // ===== EFECTO GLITCH EN HERO TITLE =====
+            let glitchInterval;
+
+            function startGlitchEffect() {
+                if (glitchInterval) clearInterval(glitchInterval);
+                glitchInterval = setInterval(() => {
+                    const title = document.querySelector('.hero-title');
+                    if (!title) return;
+
+                    const originalText = title.textContent;
+                    const glitchChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@$%&*!?<>';
+                    let iterations = 0;
+                    const maxIterations = 8;
+
+                    const glitchTimer = setInterval(() => {
+                        if (iterations >= maxIterations) {
+                            title.textContent = originalText;
+                            clearInterval(glitchTimer);
+                            return;
+                        }
+                        title.textContent = originalText
+                            .split('')
+                            .map((char, index) => {
+                                if (char === ' ') return ' ';
+                                if (Math.random() < 0.3) {
+                                    return glitchChars[Math.floor(Math.random() * glitchChars
+                                        .length)];
+                                }
+                                return char;
+                            })
+                            .join('');
+                        iterations++;
+                    }, 50);
+                }, 5000);
+            }
+
+            startGlitchEffect();
+
+            // ===== ANIMACIÓN EN GALERÍA ITEMS CON GSAP =====
+            gsap.fromTo('.gallery-item',
+                { opacity: 0, y: 60, scale: 0.9 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    delay: 0.3,
+                    ease: 'back.out(1.5)',
+                    scrollTrigger: {
+                        trigger: '.gallery-grid',
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+
+            // ===== ANIMACIÓN DE ENTRADA PARA PAQUETES =====
+            gsap.fromTo('.paquete-card',
+                { opacity: 0, y: 80, rotateX: 15 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    rotateX: 0,
+                    duration: 0.9,
+                    stagger: 0.15,
+                    delay: 0.2,
+                    ease: 'back.out(1.5)',
+                    scrollTrigger: {
+                        trigger: '.swiper-paquetes',
+                        start: 'top 75%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+
+            // ===== EFECTO TILT EN PAQUETE CARDS =====
+            document.querySelectorAll('.paquete-card').forEach(card => {
+                card.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / centerY * -8;
+                    const rotateY = (x - centerX) / centerX * 8;
+                    this.style.transform =
+                        `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+                    this.style.transition = 'transform 0.15s ease-out';
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform =
+                        'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+                    this.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+            });
+
+            // ===== EFECTO TILT EN GALERÍA =====
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('mousemove', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / centerY * -6;
+                    const rotateY = (x - centerX) / centerX * 6;
+                    this.style.transform =
+                        `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+                    this.style.transition = 'transform 0.1s ease-out';
+                });
+
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
+                    this.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                });
+            });
+
+            // ===== COUNTER ANIMATION PARA ESTADÍSTICAS (OPCIONAL) =====
+            // Puedes agregar elementos con clase .counter para animar números
+
+            // ===== TECLA ESC PARA CERRAR MENÚ MÓVIL =====
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+
+            // ===== CLIC FUERA DEL MENÚ PARA CERRAR =====
+            document.addEventListener('click', function(e) {
+                if (navMenu.classList.contains('active') &&
+                    !navMenu.contains(e.target) &&
+                    !hamburger.contains(e.target)) {
+                    toggleMenu();
+                }
+            });
+
+            console.log('🚀 Retro World - Sitio cargado exitosamente');
+            console.log('✨ Animaciones: GSAP, Swiper, AOS, Canvas');
+            console.log('🎨 Diseño retro-futurista profesional');
+        });
+    </script>
 </body>
 </html>
-
