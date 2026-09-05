@@ -1,0 +1,107 @@
+// 1. REGISTRO DE PLUGINS GSAP
+gsap.registerPlugin(ScrollTrigger);
+
+// 2. CONFIGURACIÓN DEL CANVAS (Fondo de Partículas Retro/Tech)
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let particlesArray = [];
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+    }
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        // Rebotar en los bordes
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    }
+    draw() {
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
+function initCanvas() {
+    particlesArray = [];
+    for (let i = 0; i < 100; i++) {
+        particlesArray.push(new Particle());
+    }
+}
+
+function animateCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+    }
+    requestAnimationFrame(animateCanvas);
+}
+
+initCanvas();
+animateCanvas();
+
+// 3. ANIMACIONES GSAP (Timelines y ScrollTrigger)
+// Animación de entrada para el Hero
+const tl = gsap.timeline();
+tl.from(".logo", { y: -50, opacity: 0, duration: 1, ease: "power3.out" })
+  .from(".menu-links li", { y: -50, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" }, "-=0.5")
+  .from(".anim-title", { y: 30, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.5")
+  .from(".anim-text", { y: 30, opacity: 0, duration: 1, ease: "power3.out" }, "-=0.7")
+  .from(".anim-btn", { scale: 0, opacity: 0, duration: 0.5, ease: "back.out(1.7)" }, "-=0.5");
+
+// Animación al hacer scroll para la sección de destinos
+gsap.from(".section-title", {
+    scrollTrigger: {
+        trigger: ".carousel-section",
+        start: "top 80%",
+    },
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out"
+});
+
+// 4. INICIALIZACIÓN DE SWIPER.JS (Carrusel Avanzado Efecto 3D)
+const swiper = new Swiper('.mySwiper', {
+    effect: 'coverflow',
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 'auto',
+    coverflowEffect: {
+        rotate: 30, // Grados de rotación
+        stretch: 0,
+        depth: 200, // Profundidad del 3D
+        modifier: 1,
+        slideShadows: true,
+    },
+    loop: true,
+    autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+});
+
